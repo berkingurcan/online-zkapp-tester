@@ -31,9 +31,9 @@ app.post('/run', async (req, res) => {
     // Generate file
     const filepath = await generateFile(format, code);
     // Run and test file an send response
-    //const testresult = await executeTest();
+    const testresult = await executeTest();
 
-    return res.json({filepath});
+    return res.json({testresult});
 });
 
 app.listen(5000, () => {
