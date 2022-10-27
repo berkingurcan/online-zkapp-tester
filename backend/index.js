@@ -4,6 +4,7 @@ const { executeTest } = require('./executeTest');
 const { generateFile } = require('./generateFile');
 const { deleteFile } = require('./deleteFile');
 const { readReport } = require('./readReport');
+const { deleteReport } = require('./deleteReport');
  
 const app = express();
 
@@ -35,6 +36,8 @@ app.post('/run', async (req, res) => {
     const testresult = await executeTest();
     // read output.txt and return as a response
     const testreport = await readReport();
+    // delete
+    const deletereport = await deleteReport();
 
     return res.json({testreport});
 });
