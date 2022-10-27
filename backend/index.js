@@ -3,7 +3,8 @@ const express = require('express');
 const { executeTest } = require('./executeTest');
 const { generateFile } = require('./generateFile');
 const { deleteFile } = require('./deleteFile');
-
+const { readReport } = require('./readReport');
+ 
 const app = express();
 
 app.use(express.urlencoded({extended: true}));
@@ -30,10 +31,12 @@ app.post('/run', async (req, res) => {
     const deletedFile = await deleteFile();
     // Generate file
     const filepath = await generateFile(format, code);
-    // Run and test file an send response
+    // Run and test file write repo/module0/output.txt
     const testresult = await executeTest();
+    // read output.txt and return as a response
+    const testreport = await readReport();
 
-    return res.json({testresult});
+    return res.json({testreport});
 });
 
 app.listen(5000, () => {
