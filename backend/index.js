@@ -5,6 +5,8 @@ const { generateFile } = require('./generateFile');
 const { deleteFile } = require('./deleteFile');
 const { readReport } = require('./readReport');
 const { deleteReport } = require('./deleteReport');
+const { runCLI } = require('jest');
+// const { ProjectConfig } = require('jest');
  
 const app = express();
 
@@ -33,13 +35,19 @@ app.post('/run', async (req, res) => {
     // Generate file
     const filepath = await generateFile(format, code);
     // Run and test file write repo/module0/output.txt
-    const testresult = await executeTest();
+    // const testresult = await executeTest();
     // read output.txt and return as a response
-    const testreport = await readReport();
     // delete
-    const deletereport = await deleteReport();
 
-    return res.json({testreport});
+    const projectRootPath = './repo/module0';
+    const jestConfig = {
+        roots: ['./src'],
+        testRegex: '\\Add.test\\.ts$'
+    };
+
+    const result = await runCLI(jestConfig , [projectRootPath]);
+
+    return res.json({result});
 });
 
 app.listen(5000, () => {

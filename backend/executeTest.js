@@ -1,6 +1,4 @@
-const {exec, spawn, execSync} = require('child_process');
-const {fs} = require('fs');
-const { cwd, stderr } = require('process');
+const spawnProcess = require("./spawnProcess");
 
 const executeTest = async () => {
     /* return new Promise((resolve, reject) => {
@@ -13,15 +11,14 @@ const executeTest = async () => {
     }) */
 
     try {
-        const result = execSync('npm test --no-color 2>output.txt', {cwd: './repo/module0'}, (error, stderr, stdout) => {
-            return stderr
-        })
-        //console.log(result.toString());
-        return result.toString()
-    } catch(err) {
-        console.log(err)
-        return err
-    }
+        const result = await spawnProcess("npm test --ci --no-color", {
+          cwd: "./repo/module0",
+        });
+    
+        return {status: true, result};
+      } catch (err) {
+        return {status: false, error: err};
+      }
 };
 
 module.exports = {
