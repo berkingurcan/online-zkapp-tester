@@ -41,9 +41,11 @@ app.post('/run', async (req, res) => {
     // delete
 
     const projectRootPath = path.join(__dirname, './repo');
+
+    const modulePath = 'module0'
     
     const jestConfig = {
-        roots: ['./module0/src'],
+        roots: [`./${modulePath}/src`],
         testRegex: '\\Add.test\\.ts$',
         verbose: true,
         preset: 'ts-jest/presets/default-esm',
@@ -59,7 +61,7 @@ app.post('/run', async (req, res) => {
         },
         resolver: '<rootDir>/jest-resolver.cjs',
         transformIgnorePatterns: [
-          '<rootDir>/node_modules/(?!snarkyjs/node_modules/tslib)',
+          `<rootDir>/${modulePath}/node_modules/(?!snarkyjs/node_modules/tslib)`,
         ],
     };
 
