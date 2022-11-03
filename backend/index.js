@@ -1,5 +1,6 @@
 const { urlencoded } = require('express');
 const express = require('express');
+const path = require('path');
 const { executeTest } = require('./executeTest');
 const { generateFile } = require('./generateFile');
 const { deleteFile } = require('./deleteFile');
@@ -7,7 +8,7 @@ const { readReport } = require('./readReport');
 const { deleteReport } = require('./deleteReport');
 const { runCLI } = require('jest');
 // const { ProjectConfig } = require('jest');
- 
+
 const app = express();
 
 app.use(express.urlencoded({extended: true}));
@@ -39,10 +40,29 @@ app.post('/run', async (req, res) => {
     // read output.txt and return as a response
     // delete
 
-    const projectRootPath = './repo/module0';
+    const projectRootPath = path.join(__dirname, './repo');
+
+    const modulePath = 'module0'
+    
     const jestConfig = {
-        roots: ['./src'],
-        testRegex: '\\Add.test\\.ts$'
+        roots: [`./${modulePath}/src`],
+        testRegex: '\\Add.test\\.ts$',
+        verbose: true,
+        preset: 'ts-jest/presets/default-esm',
+        testEnvironment: 'node',
+        globals: {
+          'ts-jest': {
+            useESM: true,
+          },
+        },
+        transform: {
+          '^.+\\.(t)s$': 'ts-jest',
+          '^.+\\.(j)s$': 'babel-jest',
+        },
+        resolver: '<rootDir>/jest-resolver.cjs',
+        transformIgnorePatterns: [
+          `<rootDir>/${modulePath}/node_modules/(?!snarkyjs/node_modules/tslib)`,
+        ],
     };
 
     const result = await runCLI(jestConfig , [projectRootPath]);

@@ -9,6 +9,15 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.19.6",
+    "@babel/plugin-proposal-decorators": "^7.20.0",
+    "@babel/preset-env": "^7.19.4",
+    "@babel/preset-typescript": "^7.18.6",
+    "typescript": "^4.8.4",
     "zkapp-cli": "^0.4.17"
+  },
+  "dependencies": {
+    "babel-jest": "^29.2.2",
+    "ts-jest": "^29.0.3"
   }
 }
