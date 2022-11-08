@@ -7,10 +7,12 @@ const { deleteFile } = require('./deleteFile');
 const { readReport } = require('./readReport');
 const { deleteReport } = require('./deleteReport');
 const { runCLI } = require('jest');
+const cors = require('cors')
 // const { ProjectConfig } = require('jest');
 
 const app = express();
 
+app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
@@ -22,10 +24,6 @@ app.get('/', (req, res) => {
 
 app.post('/run', async (req, res) => {
     const {module, task, code, format} = req.body;
-
-/*     if (module === undefined) {
-        return res.status(400).json({success: false, error:"Empty code body!"})
-    } */
 
     if (code === undefined) {
         return res.status(400).json({success: false, error:"Empty code body!"})
