@@ -8,23 +8,24 @@ import axios from 'axios'
 
 function App() {
 
-  const [code, setCode] = useState("")
+  const [code, setCode] = useState(codes[1])
 
   const handleSubmit = async () => {
     const payload = {
       module: 0,
       task: 1,
       format: 'ts',
-      code
+      code: code
     }
+    console.log(payload.code)
 
     // TODO create ENV host
     const output = await axios.post(
-      "localhost:5000/run",
+      "http://localhost:5000/run",
       payload
     )
 
-    console.log(output)
+    console.log(output.data.result.results.success)
   }
 
   return (

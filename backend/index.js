@@ -7,10 +7,12 @@ const { deleteFile } = require('./deleteFile');
 const { readReport } = require('./readReport');
 const { deleteReport } = require('./deleteReport');
 const { runCLI } = require('jest');
+const cors = require('cors')
 // const { ProjectConfig } = require('jest');
 
 const app = express();
 
+app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
