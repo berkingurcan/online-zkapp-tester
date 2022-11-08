@@ -23,10 +23,6 @@ app.get('/', (req, res) => {
 app.post('/run', async (req, res) => {
     const {module, task, code, format} = req.body;
 
-/*     if (module === undefined) {
-        return res.status(400).json({success: false, error:"Empty code body!"})
-    } */
-
     if (code === undefined) {
         return res.status(400).json({success: false, error:"Empty code body!"})
     }

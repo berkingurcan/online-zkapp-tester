@@ -1,24 +1,54 @@
 import './App.css';
-import Editor, { useMonaco, loader } from "@monaco-editor/react";
-
+import Editor, { useMonaco, loader, EditorProps } from "@monaco-editor/react";
+import React, {useState} from 'react';
+import codes from './codes/codes.js'
+import { ChakraProvider } from '@chakra-ui/react'
+import { Button, ButtonGroup } from '@chakra-ui/react'
+import axios from 'axios'
 
 function App() {
+
+  const [code, setCode] = useState("")
+
+  const handleSubmit = async () => {
+    const payload = {
+      module: 0,
+      task: 1,
+      format: 'ts',
+      code
+    }
+
+    // TODO create ENV host
+    const output = await axios.post(
+      "localhost:5000/run",
+      payload
+    )
+
+    console.log(output)
+  }
+
   return (
-    <div className="App">
-      <div className="column">
-        <Editor
-          height="90vh"
-          theme="vs-dark"
-          defaultLanguage="typescript"
-          defaultValue= "// Some codes"
-        />
+    <ChakraProvider>
+      <div className="App">
+        <div className="column">
+          <Editor
+            height="90vh"
+            theme="vs-dark"
+            defaultLanguage="typescript"
+            defaultValue= {codes[1]}
+            onChange={ (e) => setCode(e)}
+          />
+        </div>
+        <div className="column">
+          <h2>
+            MODULE 0: Hello zkApps
+          </h2>
+          <Button onClick={handleSubmit} colorScheme='teal' size='md'>
+            Test Code
+          </Button>
+        </div>
       </div>
-      <div className="column">
-        <h2>
-          MODULE 0
-        </h2>
-      </div>
-    </div>
+    </ChakraProvider>
   );
 }
 
