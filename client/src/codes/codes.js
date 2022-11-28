@@ -59,8 +59,9 @@ const codes = {
         // TODO: Set the num to 4
       }
     
-      @method update(multiplied: Field) {
-        // TODO: Method: If multiplied input double of the num, set the num its double
+      // TODO: pass the input parameter
+      @method update() {
+        // TODO: Method: If your input double of the num, set the num its double
       }
     }
     `),

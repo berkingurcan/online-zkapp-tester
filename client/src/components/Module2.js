@@ -22,7 +22,7 @@ const Module1 = () => {
 
     // TODO create ENV host
     const output = await axios.post(
-      "http://localhost:5000/run",
+      "http://localhost:5000/run/module2",
       payload
     )
 
