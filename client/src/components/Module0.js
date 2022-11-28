@@ -37,13 +37,13 @@ const Module1 = () => {
             height="90vh"
             theme="vs-dark"
             defaultLanguage="typescript"
-            defaultValue= {codes[2]}
+            defaultValue= {codes[1]}
             onChange={ (e) => setCode(e)}
           />
         </div>
         <div className="column">
           <h2>
-            MODULE 1: Multiply Two
+            MODULE 0: Hello zkApps
           </h2>
           <Button onClick={handleSubmit} colorScheme='teal' size='md'>
             Test Code

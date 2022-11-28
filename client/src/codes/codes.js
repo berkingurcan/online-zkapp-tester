@@ -35,6 +35,93 @@ const codes = {
           this.num.set(newState);
         }
       }      
+    `),
+    2: rTabs(`
+    import {
+      Field,
+      SmartContract,
+      state,
+      State,
+      method,
+      DeployArgs,
+      Permissions,
+    } from 'snarkyjs';
+    
+    export class MultiplyTwo extends SmartContract {
+      // TODO: Create Field State variable 'num'
+    
+      deploy(args: DeployArgs) {
+        super.deploy(args);
+        this.setPermissions({
+          ...Permissions.default(),
+          editState: Permissions.proofOrSignature(),
+        });
+        // TODO: Set the num to 4
+      }
+    
+      @method update(multiplied: Field) {
+        // TODO: Method: If multiplied input double of the num, set the num its double
+      }
+    }
+    `),
+    3: rTabs(`
+    import {
+      Field,
+      SmartContract,
+      state,
+      State,
+      method,
+      DeployArgs,
+      Poseidon,
+      Permissions,
+    } from 'snarkyjs';
+    
+    export class Password extends SmartContract {
+      // TODO: Create State Field variable 'x'
+    
+      deploy(args: DeployArgs) {
+        super.deploy(args);
+        this.setPermissions({
+          ...Permissions.default(),
+          editState: Permissions.proofOrSignature(),
+        });
+      }
+    
+      @method initState(salt: Field, firstSecret: Field) {
+        // TODO: Set the state x to Poseidon hash of salt and firstSecret(left to right :))
+      }
+    
+      @method updatePassword(salt: Field, secret: Field, updatedPassword: Field) {
+        // If salt and current secret is valid update the x with updatedPassword
+      }
+    }
+    `),
+    4: rTabs(`
+    import {
+      method,
+      SmartContract,
+      PublicKey,
+      UInt64,
+      DeployArgs,
+      Permissions,
+    } from 'snarkyjs';
+    // IN PRODUCTION :)
+    export class SendMINAExample extends SmartContract {
+      deploy(args: DeployArgs) {
+        super.deploy(args);
+        this.setPermissions({
+          ...Permissions.default(),
+          editState: Permissions.proofOrSignature(),
+          editSequenceState: Permissions.proofOrSignature(),
+        });
+        // TODO: Deploy the zkapp with 10 MINA Balance
+      }
+    
+      @method sendMINA(receiverAddress: PublicKey, amount: UInt64) {
+        // TODO: Send amount Mina to receiverAddress
+      }
+    }
+    
     `)
 }
 
