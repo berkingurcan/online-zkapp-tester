@@ -63,7 +63,7 @@ const Module1 = () => {
             Before dive into private inputs and hash functions please study this tutorial carefully: <a href='https://docs.minaprotocol.com/zkapps/tutorials/private-inputs-hash-functions' target="_blank"><span>tutorial.</span></a>
             <br></br>
 
-            First task is:
+            Task is:
             <p>Create a smart contract which you can set private state and update it if you know it :).</p>
             <p>
               <li>Firstly, create Create Field State variable 'x'
