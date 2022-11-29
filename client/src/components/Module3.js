@@ -13,10 +13,10 @@ const Module1 = () => {
 
   const handleSubmit = async () => {
     const payload = {
-      module: 0,
-      task: 1,
       format: 'ts',
-      code: code
+      code: code,
+      pathname: 'repo/module3/src',
+      filename: 'SendMINAExample.ts'
     }
     console.log(payload.code)
 

@@ -14,10 +14,10 @@ const Module1 = () => {
 
   const handleSubmit = async () => {
     const payload = {
-      module: 0,
-      task: 1,
       format: 'ts',
-      code: code
+      code: code,
+      pathname: 'repo/module2/src',
+      filename: 'Password.ts'
     }
     console.log(payload.code)
 
