@@ -13,6 +13,12 @@ const codeBlocks = {
     @method update(multiplied: Field) {...}
     `),
     4: rTabs(`
+    @method updatePassword(salt: Field, secret: Field, updatedPassword: Field) {...}
+    `),
+    5: rTabs(`
+        
+    `),
+    6: rTabs(`
         
     `)
    

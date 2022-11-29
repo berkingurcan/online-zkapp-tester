@@ -88,12 +88,12 @@ const codes = {
         });
       }
     
-      @method initState(salt: Field, firstSecret: Field) {
+      @method initState() {
         // TODO: Set the state x to Poseidon hash of salt and firstSecret(left to right :))
       }
     
-      @method updatePassword(salt: Field, secret: Field, updatedPassword: Field) {
-        // If salt and current secret is valid update the x with updatedPassword
+      @method updatePassword() {
+        // If salt and current secret is valid update the x with updated secret
       }
     }
     `),
