@@ -54,8 +54,9 @@ const Module1 = () => {
         </div>
         <div className="column">
           <h2>
-            MODULE 0: Hello zkApps
+            MODULE 0: DEMO ADD.ts
           </h2>
+
           <Button onClick={handleSubmit} colorScheme='teal' size='md'>
             Test Code
           </Button>
