@@ -68,6 +68,53 @@ app.post('/run', async (req, res) => {
     return res.json({result});
 });
 
+app.post('/run/module1', async (req, res) => {
+  const {module, task, code, format} = req.body;
+
+  if (code === undefined) {
+      return res.status(400).json({success: false, error:"Empty code body!"})
+  }
+
+  // delete first file
+  const deletedFile = await deleteFile();
+  // Generate file
+  const filepath = await generateFile(format, code);
+  // Run and test file write repo/module0/output.txt
+  // const testresult = await executeTest();
+  // read output.txt and return as a response
+  // delete
+
+  const projectRootPath = path.join(__dirname, './repo');
+
+  const modulePath = 'module1'
+  
+  const jestConfig = {
+      roots: [`./${modulePath}/src`],
+      testRegex: '\\MultiplyTwo.test\\.ts$',
+      verbose: true,
+      preset: 'ts-jest/presets/default-esm',
+      testEnvironment: 'node',
+      globals: {
+        'ts-jest': {
+          useESM: true,
+        },
+      },
+      transform: {
+        '^.+\\.(t)s$': 'ts-jest',
+        '^.+\\.(j)s$': 'babel-jest',
+      },
+      resolver: '<rootDir>/jest-resolver.cjs',
+      transformIgnorePatterns: [
+        `<rootDir>/${modulePath}/node_modules/(?!snarkyjs/node_modules/tslib)`,
+      ],
+  };
+
+  const result = await runCLI(jestConfig , [projectRootPath]);
+
+  return res.json({result});
+});
+
+
 app.listen(5000, () => {
     console.log(`Listening on port 5000!`);
 });
