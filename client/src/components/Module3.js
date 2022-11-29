@@ -33,7 +33,7 @@ const Module1 = () => {
 
     console.log(output.data.result.results.success)
     setSpinner(false)
-
+//WORKING EVERYTHING
     if (output.data.result.results.success) {
       setResult('Congratulations! You Passed all tests! Go to next task')
     } else {
