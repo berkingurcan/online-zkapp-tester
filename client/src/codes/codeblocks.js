@@ -16,10 +16,17 @@ const codeBlocks = {
     @method updatePassword(salt: Field, secret: Field, updatedPassword: Field) {...}
     `),
     5: rTabs(`
-        
+    this.balance.addInPlace(UInt64.from(5_000_000_000));
     `),
     6: rTabs(`
-        
+    deploy(args: DeployArgs) {
+        super.deploy(args);
+        this.setPermissions({
+          ...Permissions.default(),
+          editState: Permissions.proofOrSignature(),
+          editSequenceState: Permissions.proofOrSignature(),
+        });
+    }
     `)
    
 }
