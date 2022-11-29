@@ -10,6 +10,7 @@ import axios from 'axios'
 
 const Module1 = () => {
   const [code, setCode] = useState(codes[1])
+  const [result, setResult] = useState()
 
   const handleSubmit = async () => {
     const payload = {
@@ -27,6 +28,11 @@ const Module1 = () => {
     )
 
     console.log(output.data.result.results.success)
+    if (output.data.result.results.success) {
+      setResult('Congratulations! You Passed all tests! Go to next task')
+    } else {
+      setResult('Sorry, your code is incorrect! Please try again')
+    }
   }
 
   return (
@@ -48,6 +54,7 @@ const Module1 = () => {
           <Button onClick={handleSubmit} colorScheme='teal' size='md'>
             Test Code
           </Button>
+          <h3>{result}</h3>
         </div>
       </div>
     </ChakraProvider>
