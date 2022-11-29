@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 import codes from '../codes/codes.js'
 import { ChakraProvider } from '@chakra-ui/react'
 import { Button, ButtonGroup } from '@chakra-ui/react'
+import { Spinner } from '@chakra-ui/react'
 import axios from 'axios'
 import { CodeBlock, dracula } from "react-code-blocks";
 import codeBlocks from '../codes/codeblocks';
@@ -12,8 +13,10 @@ import codeBlocks from '../codes/codeblocks';
 const Module1 = () => {
   const [code, setCode] = useState(codes[1])
   const [result, setResult] = useState()
+  const [spinner, setSpinner] = useState(false)
 
   const handleSubmit = async () => {
+    setSpinner(true)
     const payload = {
       format: 'ts',
       code: code,
@@ -29,6 +32,8 @@ const Module1 = () => {
     )
 
     console.log(output.data.result.results.success)
+    setSpinner(false)
+
     if (output.data.result.results.success) {
       setResult('Congratulations! You Passed all tests! Go to next task')
     } else {
@@ -55,7 +60,7 @@ const Module1 = () => {
           <br></br>
 
           <p className='texts'>
-            Befora dive into private inputs and hash functions please study this tutorial carefully: <a href='https://docs.minaprotocol.com/zkapps/tutorials/private-inputs-hash-functions' target="_blank"><span>tutorial.</span></a>
+            Before dive into private inputs and hash functions please study this tutorial carefully: <a href='https://docs.minaprotocol.com/zkapps/tutorials/private-inputs-hash-functions' target="_blank"><span>tutorial.</span></a>
             <br></br>
 
             First task is:
@@ -81,7 +86,9 @@ const Module1 = () => {
           <Button onClick={handleSubmit} colorScheme='teal' size='md'>
             Test Code
           </Button>
-          <h3>{result}</h3>
+          <div>
+             {spinner ? <Spinner /> : result}
+          </div>
         </div>
       </div>
     </ChakraProvider>
